@@ -12,7 +12,7 @@ function Home() {
   }
   return (
     <Container component='main' maxWidth='xs' >
-      <img src={background} className='Bg' />
+      <img src={background} className='Bg' alt="background" />
       <div className='background' ></div>
       <Box
         sx={{

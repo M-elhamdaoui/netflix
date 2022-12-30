@@ -1,6 +1,7 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useUserContext } from "../context/userContext";
+import {useState} from "react"
 const useLogin=()=>{
     const [error,setError]=useState(null);
     const {dispatch}= useUserContext();
@@ -18,4 +19,4 @@ const useLogin=()=>{
 
 }
 
-export default useLogin
+export  {useLogin}

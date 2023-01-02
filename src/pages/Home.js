@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect } from 'react'
 import Login from '../components/Login'
 import Signup from '../components/Signup';
 import {Container,Box,Button} from "@mui/material";
 import "./Home.css";
 import background from "../assets/images/BG.jpg"
+import {useColorMode} from "../context/useTheme"
 
 function Home() {
   const [form,setForm]=useState("Login");
+  const {loadMode}=useColorMode();
   const toggle=()=>{
     setForm((last)=>last==="Login"?"Signup":"Login")
   }
+  useEffect(()=>{
+    loadMode("light")
+  },[loadMode])
   return (
     <Container component='main' maxWidth='xs' >
       <img src={background} className='Bg' alt="background" />

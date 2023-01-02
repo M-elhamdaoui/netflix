@@ -1,10 +1,21 @@
-import React ,{useState} from 'react'
+import React ,{useState,useEffect} from 'react'
 import {Box , CssBaseline} from "@mui/material";
 import Header from '../components/Header/Header';
 import SideBar from "../components/SideBar/SideBar"
+import { useUserContext } from '../context/userContext';
+import { useColorMode } from "../context/useTheme";
 const drawerWidth=240;
 
+
 function Greeting() {
+   const { DOC } = useUserContext();
+
+   const { loadMode } = useColorMode();
+   useEffect(() => {
+     if(DOC){
+      loadMode(DOC.mod);
+     }
+   },[DOC ,loadMode]);
    const [mobileOpen, setMobileOpen] = useState(false);
    const handleDrawerToggle=()=>{
     setMobileOpen(!mobileOpen);

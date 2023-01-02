@@ -11,18 +11,17 @@ import {ColorModeProvider} from "./context/useTheme"
 
 
 function App() {
-  const { user, authIsReady } = useUserContext();
-  
-
+  const { user, authIsReady ,modeIsReady } = useUserContext();
+ 
     return (
       <ColorModeProvider >
         <CssBaseline />
-        {!authIsReady && (
+        {(!authIsReady || !modeIsReady ) && (
           <div className='App'>
             <CircularProgress />
           </div>
         )}
-        {authIsReady && (
+        {(authIsReady && modeIsReady ) && (
           <Routes>
             <Route path='/' element={user ? <Greeting /> : <Home />} />
           </Routes>

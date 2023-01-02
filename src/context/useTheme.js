@@ -4,8 +4,13 @@ import {  ThemeProvider, createTheme } from "@mui/material/styles";
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 
+
 export const ColorModeProvider=({children})=>{
       const [mode, setMode] = React.useState("light");
+      
+      const loadMode = (mod)=>{
+        setMode(mod);
+      }
         const colorMode = React.useMemo(
           () => ({
             toggleColorMode: () => {
@@ -25,10 +30,11 @@ export const ColorModeProvider=({children})=>{
         );
         React.useEffect(()=>{
           
-        },[])
+         
+        },[mode])
 
     return(
-      <ColorModeContext.Provider value={colorMode} >
+      <ColorModeContext.Provider value={{colorMode,loadMode}} >
         <ThemeProvider theme={theme}>
             {children}
         </ThemeProvider>

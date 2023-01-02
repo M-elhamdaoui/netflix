@@ -1,35 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Box , Drawer ,Toolbar,Divider,List,ListItem,ListItemButton,ListItemIcon,ListItemText } from "@mui/material";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import LightModeIcon from "@mui/icons-material/LightMode";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import {useTheme} from "@mui/material/styles"
-import { useColorMode } from '../../context/useTheme';
+import { useUpdateDoc } from '../../hooks/useUpdateDoc';
+import {useUserContext} from "../../context/userContext"
+
 
 
 export default function SideBar(props) {
   const { window } = props;
   const theme=useTheme();
-  const colorMode=useColorMode();
+  const { DOC, dispatch } = useUserContext();
+  const {updateDocByID,pending}=useUpdateDoc()
+  
 
+  const toggleColor=(id)=>{
+    updateDocByID(id,theme.palette.mode==="light"?"dark":"light");
+  }
 
+  useEffect(()=>{
+   if(pending){
+    dispatch( {type:"LOADING"})
+   }else{
+    dispatch({type:"LOADMOD"})
+   }
+  },[pending,dispatch])
 
   const drawer = (
     <div>
       <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
         <List>
           <ListItem>
-            <ListItemButton onClick={colorMode.toggleColorMode}>
-              <ListItemIcon>
-                {theme.palette.mode === "light" ? (
-                  <LightModeIcon />
-                ) : (
-                  <NightlightIcon />
-                )}
-              </ListItemIcon>
-              <ListItemText primary={theme.palette.mode.toUpperCase()} />
-            </ListItemButton>
+            {DOC && (
+              <ListItemButton onClick={() => toggleColor(DOC.id)}>
+                <ListItemIcon>
+                  {theme.palette.mode === "light" ? (
+                    <LightModeIcon />
+                  ) : (
+                    <NightlightIcon />
+                  )}
+                </ListItemIcon>
+                <ListItemText primary={theme.palette.mode.toUpperCase()} />
+              </ListItemButton>
+            )}
           </ListItem>
         </List>
       </Toolbar>

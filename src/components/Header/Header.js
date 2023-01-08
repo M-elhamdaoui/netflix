@@ -122,9 +122,9 @@ function Header({ drawerWidth, handleDrawerToggle }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        position='relative'
+        position='fixed'
         sx={{
-          width: { sm: `calc(100%-${drawerWidth}px)` },
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}>
         <Toolbar>
@@ -132,7 +132,7 @@ function Header({ drawerWidth, handleDrawerToggle }) {
             color='inhert'
             area-label='open drawer'
             edge='start'
-            onClick={()=>handleDrawerToggle()}
+            onClick={() => handleDrawerToggle()}
             sx={{ mr: 2, display: { sm: "none" } }}>
             <MenuIcon sx={{ color: "white" }} />
           </IconButton>
@@ -153,7 +153,7 @@ function Header({ drawerWidth, handleDrawerToggle }) {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }} >
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Typography>{user.email}</Typography>
           </Box>
 

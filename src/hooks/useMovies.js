@@ -1,7 +1,6 @@
 import {  useEffect, useState } from "react";
 import axios from "axios"
 
-const baseUrl = "https://api.themoviedb.org/3";
 const key=process.env.REACT_APP_API_KEY;
 
 export const useMovies=(action)=>{
@@ -12,7 +11,7 @@ export const useMovies=(action)=>{
     useEffect(()=>{
         setError(null);
         setIsPending(true);
-        if(action=="getAll"){
+        if(action==="getAll"){
             axios
               .get(
                 `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`

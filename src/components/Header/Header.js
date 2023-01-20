@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { styled,alpha } from '@mui/material/styles';
 import {AppBar , Toolbar,IconButton,InputBase,Box,Menu,MenuItem,Typography} from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search";
@@ -7,6 +7,8 @@ import AccountCircle  from '@mui/icons-material/AccountCircle';
 import MoreIcon from "@mui/icons-material/MoreVert"
 import {useLogout} from "../../hooks/useLogout"
 import { useUserContext } from '../../context/userContext';
+import { Link, useNavigate } from 'react-router-dom';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 
 const Search = styled("div")(({ theme }) => ({
@@ -49,10 +51,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function Header({ drawerWidth, handleDrawerToggle }) {
+function Header({ drawerWidth, handleDrawerToggle ,back }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const {user} = useUserContext();
+    const navigate=useNavigate();
+
 
     const {logout}=useLogout();
 
@@ -75,6 +79,11 @@ function Header({ drawerWidth, handleDrawerToggle }) {
     const handleMobileMenuOpen = (event) => {
       setMobileMoreAnchorEl(event.currentTarget);
     };
+    useEffect(()=>{
+      if(!user){
+        navigate("/")
+      }
+    },[user])
 
 
         const menuId = "primary-search-account-menu";
@@ -119,7 +128,7 @@ function Header({ drawerWidth, handleDrawerToggle }) {
           </Menu>
         );
 
-  return (
+  return user && (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position='fixed'
@@ -128,14 +137,27 @@ function Header({ drawerWidth, handleDrawerToggle }) {
           ml: { sm: `${drawerWidth}px` },
         }}>
         <Toolbar>
-          <IconButton
-            color='inhert'
-            area-label='open drawer'
-            edge='start'
-            onClick={() => handleDrawerToggle()}
-            sx={{ mr: 2, display: { sm: "none" } }}>
-            <MenuIcon sx={{ color: "white" }} />
-          </IconButton>
+          {!back && (
+            <IconButton
+              color='inhert'
+              area-label='open drawer'
+              edge='start'
+              onClick={() => handleDrawerToggle()}
+              sx={{ mr: 2, display: { sm: "none" } }}>
+              <MenuIcon sx={{ color: "white" }} />
+            </IconButton>
+          )}
+          {back && (
+            <Link to='/'>
+              <IconButton
+                color='inhert'
+                area-label='open drawer'
+                edge='start'
+                sx={{ mr: 2 }}>
+                <ArrowBackIcon sx={{ color: "white" }} />
+              </IconButton>
+            </Link>
+          )}
           <Typography
             variant='h6'
             noWrap

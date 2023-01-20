@@ -7,6 +7,7 @@ import Greeting from './pages/Greeting';
 import { CircularProgress } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import {ColorModeProvider} from "./context/useTheme"
+import MovieDetails from './pages/MovieDetails';
 
 
 
@@ -23,7 +24,9 @@ function App() {
         )}
         {(authIsReady && modeIsReady ) && (
           <Routes>
+           
             <Route path='/' element={user ? <Greeting /> : <Home />} />
+            {user && <Route path='/:id' element={<MovieDetails/>} />}
           </Routes>
         )}
       </ColorModeProvider>

@@ -25,6 +25,7 @@ function Greeting() {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <Header
+      back={false}
         drawerWidth={drawerWidth}
         handleDrawerToggle={handleDrawerToggle}
       />

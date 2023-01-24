@@ -15,6 +15,7 @@ function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
+  const [userLikes,setUserLikes]=useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const { DOC } = useUserContext();
@@ -24,7 +25,18 @@ function MovieDetails() {
       loadMode(DOC.mod);
     }
   }, [DOC, loadMode]);
-
+  
+  useEffect(() => {
+    if (DOC) {
+      setUserLikes([...DOC.likes])
+    }
+  }, [DOC]);
+  useEffect(() => {
+    console.log(userLikes)
+  }, [userLikes]);
+  const addMovie = ()=>{
+    
+  }
   useEffect(() => {
     let url = `https://api.themoviedb.org/3/movie/${id}?api_key=${key}&language=en-US`;
     setIsLoading(true);
@@ -47,8 +59,7 @@ function MovieDetails() {
           justifyContent: "center",
           alignItems: "center",
           position: "relative",
-         
-          mt: 8,
+          mt: 7,
           width: "100%",
         }}>
         <Grid container spacing={2}>
@@ -58,6 +69,7 @@ function MovieDetails() {
               background={movie?.backdrop_path}
               title={movie?.title}
               poster={movie?.poster_path}
+              rating={movie?.vote_average}
             />
           </Grid>
         </Grid>

@@ -11,6 +11,7 @@ const drawerWidth=240;
 function Greeting() {
    const { DOC } = useUserContext();
    const { loadMode } = useColorMode();
+   const [page,setPage]=useState("Home")
    useEffect(() => {
      if(DOC){
       loadMode(DOC.mod);
@@ -25,16 +26,18 @@ function Greeting() {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <Header
-      back={false}
+        back={false}
         drawerWidth={drawerWidth}
         handleDrawerToggle={handleDrawerToggle}
       />
       <SideBar
+        setPage={setPage}
+        page={page}
         drawerWidth={drawerWidth}
         handleDrawerToggle={handleDrawerToggle}
         mobileOpen={mobileOpen}
       />
-      <Container drawerWidth={drawerWidth} />
+      <Container page={page} drawerWidth={drawerWidth} />
     </Box>
   );
 }

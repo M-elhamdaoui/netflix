@@ -24,7 +24,6 @@ function App() {
         )}
         {(authIsReady && modeIsReady ) && (
           <Routes>
-           
             <Route path='/' element={user ? <Greeting /> : <Home />} />
             {user && <Route path='/:id' element={<MovieDetails/>} />}
           </Routes>

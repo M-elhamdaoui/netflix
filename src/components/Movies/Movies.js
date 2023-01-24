@@ -10,7 +10,7 @@ function Movies({data}) {
         {data.map((elem,index)=>{
           if(index===0){
             return (
-              <Grid xs={12} key={elem.id}>
+              <Grid item xs={12} key={elem.id}>
                 <Link to={`/${elem.id}`} className='link'>
                   <Cover
                     title={elem.title}

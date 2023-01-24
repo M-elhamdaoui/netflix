@@ -18,7 +18,7 @@ export default function SideBar(props) {
   
 
   const toggleColor=(id)=>{
-    updateDocByID(id,theme.palette.mode==="light"?"dark":"light");
+    updateDocByID(id,"mod",theme.palette.mode==="light"?"dark":"light");
   }
 
   useEffect(()=>{
@@ -29,7 +29,7 @@ export default function SideBar(props) {
    }
   },[pending,dispatch])
 
-  const drawer = (
+  let drawer = (
     <div>
       <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
         <List>
@@ -51,10 +51,15 @@ export default function SideBar(props) {
       </Toolbar>
       <Divider />
       <List>
-        {["Favorite", "Action", "Drama", "Science fiction "].map(
+        {["Home", "Favorite", "Action", "Drama", "Science fiction "].map(
           (text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton
+                sx={{
+                  backgroundColor:
+                    props.page === text ? "rgba(255,255,255,0.1)" : "",
+                }}
+                onClick={() => props.setPage(text)}>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
@@ -68,7 +73,12 @@ export default function SideBar(props) {
       <List>
         {["Comedy", "Fantasy", "Adventure"].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton
+              sx={{
+                backgroundColor:
+                  props.page === text ? "rgba(255,255,255,0.1)" : "",
+              }}
+              onClick={() => props.setPage(text)}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>

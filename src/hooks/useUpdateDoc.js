@@ -6,12 +6,12 @@ import { db } from "../firebase/firebase"
 export const useUpdateDoc=()=>{
 const [pending,setPending]=useState(false)
 
-    const updateDocByID=(id,value)=>{
+    const updateDocByID=(id,what,value)=>{
         setPending(true)
         const docRef=doc(db,"Users",id);
         console.log(docRef)
         try{
-              updateDoc(docRef,{mod:value}).then(()=>{
+              updateDoc(docRef,{[what]:value}).then(()=>{
                 setPending(false);
               })
                

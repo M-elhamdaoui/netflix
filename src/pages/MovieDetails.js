@@ -64,13 +64,11 @@ function MovieDetails() {
         }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <MoviePoster
-              overview={movie?.overview}
-              background={movie?.backdrop_path}
-              title={movie?.title}
-              poster={movie?.poster_path}
-              rating={movie?.vote_average}
-            />
+            {movie && (
+              <MoviePoster
+                movie={movie}
+              />
+            )}
           </Grid>
         </Grid>
       </Box>

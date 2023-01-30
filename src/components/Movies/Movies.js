@@ -11,7 +11,7 @@ function Movies({data}) {
           if(index===0){
             return (
               <Grid item xs={12} key={elem.id}>
-                <Link to={`/${elem.id}`} className='link'>
+                <Link to={`/movies/${elem.id}`} className='link'>
                   <Cover
                     title={elem.title}
                     image={elem.backdrop_path}
@@ -23,7 +23,7 @@ function Movies({data}) {
           }else{
                 return (
                   <Grid item xs={12} md={3} key={elem.id}>
-                    <Link to={`/${elem.id}`}>
+                    <Link to={`/movies/${elem.id}`}>
                       <MovieCover image={elem.poster_path} title={elem.title} />
                     </Link>
                   </Grid>

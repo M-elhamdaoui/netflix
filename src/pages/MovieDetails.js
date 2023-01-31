@@ -48,6 +48,9 @@ function MovieDetails() {
         setIsLoading(false);
       })
       .catch((err) => setError(err.message));
+      return ()=>{
+        window.scrollTo(0, 0);
+      }
   }, [id]);
   return (
     <Box sx={{ display: "flex" }}>
@@ -64,11 +67,7 @@ function MovieDetails() {
         }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            {movie && (
-              <MoviePoster
-                movie={movie}
-              />
-            )}
+            {movie && !isLoading && <MoviePoster movie={movie} />}
           </Grid>
         </Grid>
       </Box>

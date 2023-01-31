@@ -1,9 +1,10 @@
-import { Box} from '@mui/material'
+import { Box, Typography} from '@mui/material'
 import React,{useEffect,useState} from 'react'
 import "./style.css"
 import MainInfos from '../MainInfos';
 import axios from 'axios';
 import Actors from "../Actors"
+import Similar from '../Similar/Similar';
 
 function MoviePoster({movie}) {
   const [credits,setCredits]=useState(null);
@@ -19,27 +20,37 @@ function MoviePoster({movie}) {
     console.log(credits)
   },[credits])
   return (
-    <Box
-      sx={{
-        width: "100%",
-        height: { xs: "100%", md: "91.6vh" },
-        backgroundImage: ` url(
+    <>
+      <Box
+        sx={{
+          width: "100%",
+          height: {md: "91.6vh" },
+          backgroundImage: ` url(
           "https://image.tmdb.org/t/p/original${movie.backdrop_path}"
         )`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        position: "relative",
-      }}>
-      <div className='overlay'>
-        <MainInfos
-          title={movie.title}
-          overview={movie.overview}
-          poster={movie.poster_path}
-          rating={movie.vote_average}
-        />
-        {credits && <Actors casts={credits?.cast} />}
-      </div>
-    </Box>
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          position: "relative",
+          
+        }}>
+        <div className='overlay'>
+          <MainInfos
+            title={movie.title}
+            overview={movie.overview}
+            poster={movie.poster_path}
+            rating={movie.vote_average}
+          />
+          {credits && <Actors casts={credits?.cast} />}
+        </div>
+      </Box>
+
+      <Box sx={{width:"100%",overflowX:"hidden",display:"flex",alignItems:{xs:"flex-start",lg:"center"},flexDirection:{xs:"column",lg:"row"}}} >
+        <Box sx={{ m: 2 }}>
+          <Typography variant='h6' sx={{fontWeight:"bold"}} >Similar Movies </Typography>
+        </Box>
+        <Similar id={movie.id} />
+      </Box>
+    </>
   );
 }
 

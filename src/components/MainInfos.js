@@ -7,12 +7,13 @@ function MainInfos({poster,title,overview,rating}) {
   return (
     <Paper
       sx={{
-        mt: { xs: 10, md: 0 },
+        mt: { xs: 5, lg: 0 },
+        mr:{xs:0,sm:1},
         width: { xs: "100%", md: "50%" },
-        p: 2,
+        p: 1,
         borderRadius: "20px",
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "flex-start",
         flexDirection: { xs: "column", md: "row" },
       }}>
       <Box
@@ -26,7 +27,7 @@ function MainInfos({poster,title,overview,rating}) {
       </Box>
       <Box
         sx={{
-          width: { xs: "100%", md: "50%" },
+          width: { xs: "100%", md: "60%",lg:"60%" },
           p: 1,
           alignSelf: "center",
         }}>

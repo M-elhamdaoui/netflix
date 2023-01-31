@@ -3,7 +3,7 @@ import {Box, Avatar, Typography} from "@mui/material"
 
 function Actor({name,image,character}) {
   return (
-    <Box sx={{display:"flex",width:"250px",p:1,justifyContent:"space-evenly" }} >
+    <Box sx={{display:"flex",borderRadius:"20px",width:"100%",p:1,justifyContent:"flex-start" , "&:hover":{background:"rgba(0,0,0,0.2)",cursor:"pointer"}}} >
       <Box>
         <Avatar
           alt={name}

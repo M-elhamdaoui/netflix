@@ -17,14 +17,14 @@ Last update of this App :
 ![5 1](https://user-images.githubusercontent.com/44306060/215896245-39a28032-2ff6-43e2-b368-cee58bddf301.png)
 
 # 6 movie details Similar movies (Dark)
-you can scroll Verticaly 
+you can scroll horizontally 
 ![5 2](https://user-images.githubusercontent.com/44306060/215896376-1394414e-0932-4fe1-b268-bc554b6de143.png)
 
 # 7 Movie details (Light)
 ![6 1](https://user-images.githubusercontent.com/44306060/215896486-ec81a6a2-d6d3-4a83-a42f-7efd6fe32786.png)
 
 # 8 Movie details Similar movies (Light)
-you can scroll Verticaly 
+you can scroll horizontally 
 ![6 2](https://user-images.githubusercontent.com/44306060/215896611-b0a887bd-23ff-4e33-a2de-6f2a43db7eb1.png)
 
 

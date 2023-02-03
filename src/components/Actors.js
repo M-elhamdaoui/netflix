@@ -18,31 +18,16 @@ function Actors({ casts }) {
           alignSelf:"center"
         }}>
             <Typography variant="h5" >Actors </Typography>
-        <Actor
-          name={casts[0].original_name}
-          image={casts[0].profile_path}
-          character={casts[0].character}
-        />
-        <Actor
-          name={casts[1].original_name}
-          image={casts[1].profile_path}
-          character={casts[1].character}
-        />
-        <Actor
-          name={casts[2].original_name}
-          image={casts[2].profile_path}
-          character={casts[2].character}
-        />
-        <Actor
-          name={casts[3].original_name}
-          image={casts[3].profile_path}
-          character={casts[3].character}
-        />
-        <Actor
-          name={casts[4].original_name}
-          image={casts[4].profile_path}
-          character={casts[4].character}
-        />
+            {casts.slice(0,5).map(elem=>{
+              return  (
+                <Actor
+                key={elem.id}
+                  name={elem.original_name}
+                  image={elem.profile_path}
+                  character={elem.character}
+                />
+              );
+            })}
       </Paper>
     )
   );

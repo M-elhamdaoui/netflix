@@ -5,6 +5,9 @@ import SideBar from "../components/SideBar/SideBar";
 import Container from '../components/Container/Container';
 import { useUserContext } from '../context/userContext';
 import { useColorMode } from "../context/useTheme";
+
+// sections :
+import Favorite from '../components/Favorite/Favorite';
 const drawerWidth=240;
 
 
@@ -37,7 +40,8 @@ function Greeting() {
         handleDrawerToggle={handleDrawerToggle}
         mobileOpen={mobileOpen}
       />
-      <Container page={page} drawerWidth={drawerWidth} />
+      {page==="Home"&&<Container page={page} drawerWidth={drawerWidth} />}
+      {page==="Favorite"&&<Favorite  />}
     </Box>
   );
 }

@@ -5,14 +5,17 @@ import { db } from "../firebase/firebase"
 
 export const useUpdateDoc=()=>{
 const [pending,setPending]=useState(false)
+const [done,setDone]=useState(false);
 
     const updateDocByID=(id,what,value)=>{
+        setDone(false)
         setPending(true)
         const docRef=doc(db,"Users",id);
         console.log(docRef)
         try{
               updateDoc(docRef,{[what]:value}).then(()=>{
                 setPending(false);
+                setDone(true);
               })
                
         }catch(err){
@@ -20,5 +23,5 @@ const [pending,setPending]=useState(false)
             setPending(false)
         }
     }
-    return {updateDocByID,pending};
+    return {updateDocByID,pending,done};
 }

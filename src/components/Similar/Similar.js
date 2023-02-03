@@ -24,12 +24,12 @@ function Similar({ id }) {
         p: 1,
         overflowX: "scroll",
         width: "100%",
-        "-ms-overflow-style": "none",
+        msOverflowstyle: "none",
         scrollbarWidth: "none",
         "&::-webkit-scrollbar": { display: "none" },
       }}>
       {data.map((elem) => {
-        return (
+        return elem.poster_path && (
           <Box key={elem.id}>
             <Link to={`/movies/${elem.id}`}>
               <Paper

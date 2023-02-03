@@ -35,6 +35,7 @@ function MoviePoster({movie}) {
         }}>
         <div className='overlay'>
           <MainInfos
+          id={movie.id}
             title={movie.title}
             overview={movie.overview}
             poster={movie.poster_path}

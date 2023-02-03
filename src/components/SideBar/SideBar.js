@@ -8,6 +8,11 @@ import {useTheme} from "@mui/material/styles"
 import { useUpdateDoc } from '../../hooks/useUpdateDoc';
 import {useUserContext} from "../../context/userContext"
 
+// icons 
+import HomeIcon from "@mui/icons-material/Home"; // Home icon
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied"; // Drama
+import FavoriteIcon from "@mui/icons-material/Favorite";// favorite
+
 
 
 export default function SideBar(props) {
@@ -57,13 +62,14 @@ export default function SideBar(props) {
               <ListItemButton
                 sx={{
                   backgroundColor:
-                    props.page === text ? "rgba(255,255,255,0.1)" : "",
+                    props.page === text ? "rgba(25, 118, 210, 0.4)" : "",
                 }}
                 onClick={() => props.setPage(text)}>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
+                
               </ListItemButton>
             </ListItem>
           )
@@ -76,7 +82,7 @@ export default function SideBar(props) {
             <ListItemButton
               sx={{
                 backgroundColor:
-                  props.page === text ? "rgba(255,255,255,0.1)" : "",
+                  props.page === text ? "rgba(25, 118, 210, 0.4)" : "",
               }}
               onClick={() => props.setPage(text)}>
               <ListItemIcon>

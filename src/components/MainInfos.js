@@ -1,14 +1,42 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import {Box, Paper, Rating, Typography} from "@mui/material"
 import MovieCover from './MovieCover';
 import StarIcon from "@mui/icons-material/Star";
 
-function MainInfos({poster,title,overview,rating}) {
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import IconButton from "@mui/material/IconButton";
+import { useUpdateDoc } from '../hooks/useUpdateDoc';
+import { useUserContext } from '../context/userContext';
+
+function MainInfos({id,poster,title,overview,rating}) {
+  const {updateDocByID,pending,done}=useUpdateDoc();
+  const { DOC } = useUserContext();
+  const [color,setColor]=useState("");
+  const toggleFav=()=>{
+    const data =[...DOC.likes];
+    const index=data.indexOf(id);
+
+      if(color==="error" && index!==-1){
+          setColor("");
+          data.splice(index,1);
+          console.log(index,data);
+         updateDocByID(DOC.id, "likes",data );
+      }else if(color===""){
+        setColor("error")
+        data.push(id);
+        updateDocByID(DOC.id, "likes", data);
+      }
+  }
+  useEffect(()=>{
+      if(DOC.likes.indexOf(id)!==-1){
+          setColor("error");
+      }
+  },[id,DOC])
   return (
     <Paper
       sx={{
         mt: { xs: 5, lg: 0 },
-        mr:{xs:0,sm:1},
+        mr: { xs: 0, sm: 1 },
         width: { xs: "100%", md: "50%" },
         p: 1,
         borderRadius: "20px",
@@ -27,13 +55,26 @@ function MainInfos({poster,title,overview,rating}) {
       </Box>
       <Box
         sx={{
-          width: { xs: "100%", md: "60%",lg:"60%" },
+          width: { xs: "100%", md: "60%", lg: "60%" },
           p: 1,
           alignSelf: "center",
         }}>
-        <Typography variant='h4' sx={{ mb: 1 }}>
-          {title}
-        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}>
+          <Typography variant='h4' sx={{ mb: 1 }}>
+            {title}
+          </Typography>
+          <IconButton
+            onClick={toggleFav}
+            sx={{ width: "50px", height: "50px", mb: 2 }}>
+            <FavoriteIcon fontSize='large' color={color} />
+          </IconButton>
+        </Box>
+
         <Typography variant='p'>{overview}</Typography>
         <Box sx={{ mt: 3 }}>
           <Typography>Rating :</Typography>

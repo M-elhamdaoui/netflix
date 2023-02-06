@@ -59,7 +59,7 @@ useEffect(()=>{
       <Divider />
       <List>
         {cate.map(
-          (elem, index) => (
+          (elem) => (
             <ListItem key={elem.id} disablePadding>
               <ListItemButton
                 sx={{

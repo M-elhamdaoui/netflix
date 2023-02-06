@@ -150,7 +150,7 @@ function Header({ drawerWidth, handleDrawerToggle ,back }) {
           {back && (
             
               <IconButton
-              onClick={()=>navigate("/")}
+              onClick={()=>navigate(-1)}
                 color='inhert'
                 area-label='open drawer'
                 edge='start'
@@ -159,13 +159,15 @@ function Header({ drawerWidth, handleDrawerToggle ,back }) {
               </IconButton>
            
           )}
+        <Link to="/" style={{textDecoration:"none",color:"red"}} >
           <Typography
             variant='h6'
             noWrap
             component='div'
-            sx={{ display: { xs: "none", sm: "block" }, mr: "60px" }}>
+            sx={{ display: { sm: "block" },fontWeight:"bold", mr: "60px" }}>
             NETFLIX
           </Typography>
+        </Link>
           <Search xs={{ marginLeft: "200px" }}>
             <SearchIconWrapper>
               <SearchIcon />

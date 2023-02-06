@@ -10,7 +10,7 @@ import Diversity1Icon from '@mui/icons-material/Diversity1';// family
 import PetsIcon from '@mui/icons-material/Pets';//animation
 export const cate = [
   { id: 0, name: "Home",icon:(<HomeIcon/>)},
-  { id: 0, name: "Favorite",icon:(<FavoriteIcon/>)},
+  { id: 1, name: "Favorite",icon:(<FavoriteIcon/>)},
   { id: 28, name: "Action" ,icon:<BoltIcon/> },
   { id: 12, name: "Adventure" ,icon:<AutoAwesomeIcon/>},
   { id: 16, name: "Animation" ,icon:<PetsIcon/>},

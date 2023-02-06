@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useMovies } from '../../hooks/useMovies'
 
-function Favorite() {
+function CategorieSec({cate}) {
   const {data} = useMovies("getFav");
   useEffect(()=>{
     console.log(data);
@@ -19,8 +19,8 @@ function Favorite() {
         p: 3,
         mt:8,
         width:"100%" ,
-      }}>Favorite</Box>
+      }}>{cate}</Box>
   )
 }
 
-export default Favorite
+export default CategorieSec

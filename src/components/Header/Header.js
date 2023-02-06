@@ -148,15 +148,16 @@ function Header({ drawerWidth, handleDrawerToggle ,back }) {
             </IconButton>
           )}
           {back && (
-            <Link to='/'>
+            
               <IconButton
+              onClick={()=>navigate("/")}
                 color='inhert'
                 area-label='open drawer'
                 edge='start'
                 sx={{ mr: 2 }}>
                 <ArrowBackIcon sx={{ color: "white" }} />
               </IconButton>
-            </Link>
+           
           )}
           <Typography
             variant='h6'

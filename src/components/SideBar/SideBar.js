@@ -8,10 +8,10 @@ import {useTheme} from "@mui/material/styles"
 import { useUpdateDoc } from '../../hooks/useUpdateDoc';
 import {useUserContext} from "../../context/userContext"
 
+import { cate } from './categorie';
+
 // icons 
-import HomeIcon from "@mui/icons-material/Home"; // Home icon
-import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied"; // Drama
-import FavoriteIcon from "@mui/icons-material/Favorite";// favorite
+
 
 
 
@@ -25,7 +25,9 @@ export default function SideBar(props) {
   const toggleColor=(id)=>{
     updateDocByID(id,"mod",theme.palette.mode==="light"?"dark":"light");
   }
-
+useEffect(()=>{
+  console.log(cate);
+},[])
   useEffect(()=>{
    if(pending){
     dispatch( {type:"LOADING"})
@@ -56,43 +58,26 @@ export default function SideBar(props) {
       </Toolbar>
       <Divider />
       <List>
-        {["Home", "Favorite", "Action", "Drama", "Science fiction "].map(
-          (text, index) => (
-            <ListItem key={text} disablePadding>
+        {cate.map(
+          (elem, index) => (
+            <ListItem key={elem.id} disablePadding>
               <ListItemButton
                 sx={{
                   backgroundColor:
-                    props.page === text ? "rgba(25, 118, 210, 0.4)" : "",
+                    props.page.toLowerCase() === elem.name.toLowerCase() ? "rgba(25, 118, 210, 0.4)" : "",
                 }}
-                onClick={() => props.setPage(text)}>
+                onClick={() => props.setPage(elem.name)}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {elem.icon}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={elem.name} />
                 
               </ListItemButton>
             </ListItem>
           )
         )}
       </List>
-      <Divider />
-      <List>
-        {["Comedy", "Fantasy", "Adventure"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton
-              sx={{
-                backgroundColor:
-                  props.page === text ? "rgba(25, 118, 210, 0.4)" : "",
-              }}
-              onClick={() => props.setPage(text)}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+   
     </div>
   );
     

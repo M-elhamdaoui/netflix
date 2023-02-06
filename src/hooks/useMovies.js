@@ -1,12 +1,14 @@
 import {  useEffect, useState } from "react";
 import axios from "axios"
+import { useUserContext } from "../context/userContext";
 
 const key=process.env.REACT_APP_API_KEY;
 
 export const useMovies=(action)=>{
     const [error,setError]=useState();
-    const [isPending,setIsPending]=useState(false);
-    const [data, setData]=useState([])
+    const [isPending,setIsPending]=useState(null);
+    const [data, setData]=useState([]);
+    const {DOC}=useUserContext()
 
     useEffect(()=>{
         setError(null);
@@ -25,7 +27,16 @@ export const useMovies=(action)=>{
                 setIsPending(false);
             });
         }
-    },[action])
+        if(action==="getFav"){
+          const likes=[...DOC.likes];
+          setData([]);
+           likes.forEach(async(elem)=>{
+            console.log(elem)
+              const details = await axios.get(`https://api.themoviedb.org/3/movie/${elem}?api_key=${key}&language=en-US`)
+                setData(prev=>[...prev,details.data])
+           })
+        }
+    },[action,DOC])
 
     return {error,isPending,data};
 }

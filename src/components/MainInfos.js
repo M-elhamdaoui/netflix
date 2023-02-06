@@ -1,28 +1,32 @@
 import React,{useEffect, useState} from 'react'
-import {Box, Paper, Rating, Typography} from "@mui/material"
+import {Box, Button, Paper, Rating, Snackbar, Typography} from "@mui/material"
 import MovieCover from './MovieCover';
 import StarIcon from "@mui/icons-material/Star";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import { useUpdateDoc } from '../hooks/useUpdateDoc';
 import { useUserContext } from '../context/userContext';
 
 function MainInfos({id,poster,title,overview,rating}) {
-  const {updateDocByID,pending,done}=useUpdateDoc();
+  const {updateDocByID,pending}=useUpdateDoc();
   const { DOC } = useUserContext();
   const [color,setColor]=useState("");
+  const [open,setOpen]=useState(false);
   const toggleFav=()=>{
     const data =[...DOC.likes];
     const index=data.indexOf(id);
 
       if(color==="error" && index!==-1){
           setColor("");
+          setOpen(true);
           data.splice(index,1);
           console.log(index,data);
          updateDocByID(DOC.id, "likes",data );
       }else if(color===""){
         setColor("error")
+        setOpen(true);
         data.push(id);
         updateDocByID(DOC.id, "likes", data);
       }
@@ -32,6 +36,27 @@ function MainInfos({id,poster,title,overview,rating}) {
           setColor("error");
       }
   },[id,DOC])
+  
+const handleClose = (event, reason) => {
+      if (reason === "clickaway") {
+        return;
+      }
+      setOpen(false);
+    };
+
+      const action = (
+        <React.Fragment>
+        
+          <IconButton
+            size='small'
+            aria-label='close'
+            color='inherit'
+            onClick={handleClose}>
+            <CloseIcon fontSize='small' />
+          </IconButton>
+        </React.Fragment>
+      );
+
   return (
     <Paper
       sx={{
@@ -95,6 +120,13 @@ function MainInfos({id,poster,title,overview,rating}) {
           {rating && <Box sx={{ ml: 2 }}>{rating}</Box>}
         </Box>
       </Box>
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={color===""?"Removed from favorite":"Added to Favorite"}
+        action={action}
+      />
     </Paper>
   );
 }

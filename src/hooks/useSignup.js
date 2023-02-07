@@ -10,13 +10,18 @@ export const useSignup=()=>{
     const [error,setError]=useState(null);
 
     const signup = (email, password ) => {
+         dispatch({type:"LOADING"})
         const ref=collection(db,"Users");
         setError(null);
         createUserWithEmailAndPassword(auth,email,password)
         .then(resp=>{
             addDoc(ref, { uid: resp.user.uid, mod: "light", likes: [] })
                 .then(
-              () => dispatch({ type: "LOGIN", payload: resp.user })
+              (res) => {
+                dispatch({ type: "LOGIN", payload: resp.user });
+                 
+                
+            }
             ).catch(err=>setError(err.message));
             
         })
@@ -24,6 +29,7 @@ export const useSignup=()=>{
             setError(err.message)
         })
 
+         dispatch({type:"LOADMOD"})
     };
     return {error,signup}
 }

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import {Box , Drawer ,Toolbar,Divider,List,ListItem,ListItemButton,ListItemIcon,ListItemText } from "@mui/material";
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+
 import LightModeIcon from "@mui/icons-material/LightMode";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import {useTheme} from "@mui/material/styles"
@@ -9,6 +8,7 @@ import { useUpdateDoc } from '../../hooks/useUpdateDoc';
 import {useUserContext} from "../../context/userContext"
 
 import { cate } from './categorie';
+import {  useNavigate } from 'react-router-dom';
 
 // icons 
 
@@ -20,6 +20,7 @@ export default function SideBar(props) {
   const theme=useTheme();
   const { DOC, dispatch } = useUserContext();
   const {updateDocByID,pending}=useUpdateDoc()
+  const navigate=useNavigate();
   
 
   const toggleColor=(id)=>{
@@ -61,18 +62,21 @@ useEffect(()=>{
         {cate.map(
           (elem) => (
             <ListItem key={elem.id} disablePadding>
-              <ListItemButton
+             
+                <ListItemButton
                 sx={{
                   backgroundColor:
                     props.page.toLowerCase() === elem.name.toLowerCase() ? "rgba(25, 118, 210, 0.4)" : "",
                 }}
-                onClick={() => props.setPage(elem.name)}>
+                onClick={() => navigate(`/${elem.name}`)}>
                 <ListItemIcon>
                   {elem.icon}
                 </ListItemIcon>
                 <ListItemText primary={elem.name} />
                 
               </ListItemButton>
+             
+            
             </ListItem>
           )
         )}

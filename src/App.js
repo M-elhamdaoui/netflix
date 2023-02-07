@@ -8,13 +8,12 @@ import { CircularProgress } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import {ColorModeProvider} from "./context/useTheme"
 import MovieDetails from './pages/MovieDetails';
-import Section from './pages/Section';
 
 
 
 
 function App() {
-  const { user, authIsReady ,modeIsReady } = useUserContext();
+  const { user,DOC, authIsReady ,modeIsReady } = useUserContext();
  
     return (
       <ColorModeProvider >
@@ -27,8 +26,8 @@ function App() {
         {(authIsReady && modeIsReady ) && (
           <Routes>
             <Route path='/' element={user?<Navigate to="/home" />:<Home/>} />
-            {user && <Route path='/:path' element={ <Greeting />} />}
-            {user && <Route path='/movies/:id' element={<MovieDetails/>} />}
+            {user && DOC && <Route path='/:path' element={ <Greeting  />} />}
+            {user && DOC &&<Route path='/movies/:id' element={<MovieDetails/>} />}
             
           </Routes>
         )}

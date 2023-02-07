@@ -18,6 +18,8 @@ export const authReducer=(state,action)=>{
             return {...state,modeIsReady:true};
         case "LOADING":
             return {...state,modeIsReady:false};
+        case "AUTH_NOT_READY":
+            return {...state,authIsReady:false};
         default :
             return state;
     }
@@ -33,7 +35,7 @@ export const UserProvider=({children})=>{
     const {documents:userDoc}=useCollection("Users",state.user? ["uid","==",state.user.uid]:null)
     useEffect(()=>{
          const unsub= onAuthStateChanged(auth,(user)=>{
-            console.log(user)
+            console.log(user )
             dispatch({type:"AUTH_IS_READY",payload:user});
             unsub()
             })
@@ -41,10 +43,15 @@ export const UserProvider=({children})=>{
     useEffect(()=>{
         dispatch({type:"LOADING"})
         if(userDoc){
-            dispatch({ type: "USERDOC",payload:userDoc[0] });
+            let data =[...userDoc]
+            let doc=data.find(elem=>{
+            return elem.uid===state.user?.uid
+            });
+            dispatch({ type: "USERDOC",payload:doc });
             dispatch({type:"LOADMOD"});
         }
-    },[userDoc])
+    },[state.user,userDoc])
+
     
     return (
       <UserContext.Provider value={{ ...state,dispatch}}>

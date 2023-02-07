@@ -5,7 +5,7 @@ import SideBar from "../components/SideBar/SideBar";
 import Container from '../components/Container/Container';
 import { useUserContext } from '../context/userContext';
 import { useColorMode } from "../context/useTheme";
-import {Navigate, Routes, useParams} from "react-router-dom"
+import { useParams} from "react-router-dom"
 
 // sections :
 import Favorite from '../components/Favorite/Favorite';
@@ -17,10 +17,9 @@ function Greeting() {
   const {path}=useParams()
    const { DOC } = useUserContext();
    const { loadMode } = useColorMode();
-   const [page,setPage]=useState("Home")
-   useEffect(()=>{
-    setPage(path);
-   },[path])
+
+ 
+
    useEffect(() => {
      if(DOC){
       loadMode(DOC.mod);
@@ -40,18 +39,18 @@ function Greeting() {
         handleDrawerToggle={handleDrawerToggle}
       />
       <SideBar
-        setPage={setPage}
-        page={page}
+        setPage={()=>null}
+        page={path}
         drawerWidth={drawerWidth}
         handleDrawerToggle={handleDrawerToggle}
         mobileOpen={mobileOpen}
       />
       
-      {page.toLowerCase()==="home"&&<Container page={page} drawerWidth={drawerWidth} />}
-      {page.toLowerCase()==="favorite"&&<Favorite  />}
-      {page.toLowerCase()!=="favorite" && page.toLowerCase()!=="home" && <CategorieSec cate={page} /> }
+      {path.toLowerCase()==="home"&&<Container page={path} drawerWidth={drawerWidth} />}
+      {path.toLowerCase()==="favorite"&&<Favorite  />}
+      {path.toLowerCase()!=="favorite" && path.toLowerCase()!=="home" && <CategorieSec cate={path} /> }
     </Box>
   );
 }
 
-export default Greeting
+export default Greeting 
